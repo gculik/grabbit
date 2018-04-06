@@ -66,8 +66,8 @@ class GrabbitContentPullServlet extends SlingSafeMethodsServlet {
         }
         final excludePaths = request.getParameterValues("excludePath")
 
-        final decodedPath = URLDecoder.decode(path, "utf-8")
-        final decodedExcludePaths = excludePaths.collect { String ep -> URLDecoder.decode(ep, 'UTF-8') }
+        final decodedPath = path // URLDecoder.decode(path, "utf-8")
+        final List<String> decodedExcludePaths = excludePaths != null ? excludePaths.toList() : null //excludePaths.collect { String ep -> URLDecoder.decode(ep, 'UTF-8') }
         response.contentType = "application/octet-stream"
         response.status = SC_OK
 

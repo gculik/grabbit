@@ -100,7 +100,7 @@ class CreateHttpConnectionTasklet implements Tasklet {
         urlBuilder.addQueryParameter('after', (String)jobParameters.get(ClientBatchJob.CONTENT_AFTER_DATE) ?: '')
 
         final String excludePathParam = jobParameters.get(ClientBatchJob.EXCLUDE_PATHS)
-        final excludePaths = (excludePathParam != null && !excludePathParam.isEmpty() ? excludePathParam.split(/\*/) : Collections.EMPTY_LIST) as Collection<String>
+        final excludePaths = (excludePathParam != null && !excludePathParam.isEmpty() ? excludePathParam.split(/&&/) : Collections.EMPTY_LIST) as Collection<String>
         for(String excludePath : excludePaths) {
             urlBuilder.addQueryParameter('excludePath', excludePath)
         }

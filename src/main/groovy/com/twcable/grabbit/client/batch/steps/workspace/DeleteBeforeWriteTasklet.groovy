@@ -75,7 +75,7 @@ class DeleteBeforeWriteTasklet implements Tasklet {
         if(!thisPathsString) {
             return []
         }
-        final theExcludePaths = thisPathsString.split("\\*") as Collection<String>
+        final theExcludePaths = thisPathsString.split("&&") as Collection<String>
         final jobPathWithSlash = jobPath + '/'
 
         if (theExcludePaths.any {!it.startsWith(jobPathWithSlash)}) throw new IllegalStateException("Not all exclude paths start with \"${jobPath}\": ${theExcludePaths}")

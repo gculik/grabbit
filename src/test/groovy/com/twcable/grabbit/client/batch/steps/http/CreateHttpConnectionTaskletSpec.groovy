@@ -37,7 +37,7 @@ class CreateHttpConnectionTaskletSpec extends Specification {
                 (ClientBatchJob.SERVER_USERNAME)    : "username",
                 (ClientBatchJob.SERVER_PASSWORD)    : "password",
                 (ClientBatchJob.PATH)               : "/content/test",
-                (ClientBatchJob.EXCLUDE_PATHS)      : "/exclude*/exclude/metoo",
+                (ClientBatchJob.EXCLUDE_PATHS)      : "/exclude&&/exclude/metoo",
                 (ClientBatchJob.SCHEME)             : "http",
                 (ClientBatchJob.HOST)               : "localhost",
                 (ClientBatchJob.PORT)               : "4503",

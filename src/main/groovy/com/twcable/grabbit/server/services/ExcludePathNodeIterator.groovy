@@ -17,21 +17,34 @@
 package com.twcable.grabbit.server.services
 
 import groovy.transform.CompileStatic
+import groovy.util.logging.Slf4j
+import java.util.regex.Pattern
 import javax.jcr.Node as JcrNode
+
 
 /**
  * Custom Wrapper for Node Iterator that will iterate through a list of Nodes containing of the root node and its children
  * Accounts for cases where certain paths(i.e nodes) needs to be excluded.
  */
 @CompileStatic
+@Slf4j
 final class ExcludePathNodeIterator implements Iterator<JcrNode> {
 
     private Iterator<JcrNode> nodeIterator
-    private Collection<String> excludePathList
+    private Collection<Pattern> excludePathList
 
     public ExcludePathNodeIterator(Iterator<JcrNode> nodeIterator, Collection<String> excludePaths) {
         this.nodeIterator = nodeIterator
-        this.excludePathList = (excludePaths == null) ? (Collection<String>)Collections.EMPTY_LIST : excludePaths
+        if (excludePaths == null) {
+            this.excludePathList = (Collection<Pattern>) Collections.EMPTY_LIST
+        }
+        else {
+            this.excludePathList = new ArrayList<>()
+            excludePaths.each {
+                log.warn "Excluded regex pattern: ${it}"
+                excludePathList.add(Pattern.compile(it))
+            }
+        }
     }
 
     @Override
@@ -53,6 +66,6 @@ final class ExcludePathNodeIterator implements Iterator<JcrNode> {
     }
 
     private boolean isPathInExcludedList(String path) {
-        return excludePathList.any { path.startsWith(it) }
+        return excludePathList.any { it.matcher(path).matches() }
     }
 }

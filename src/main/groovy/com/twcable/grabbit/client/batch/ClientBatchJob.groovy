@@ -198,7 +198,7 @@ class ClientBatchJob {
                 (SERVER_USERNAME)     : credentialsBuilder.serverUsername,
                 (SERVER_PASSWORD)     : credentialsBuilder.serverPassword,
                 (TRANSACTION_ID)      : String.valueOf(configsBuilder.transactionID),
-                (EXCLUDE_PATHS)       : pathConfiguration.excludePaths.join("*"),
+                (EXCLUDE_PATHS)       : pathConfiguration.excludePaths.join("&&"),
                 (WORKFLOW_CONFIGS)    : pathConfiguration.workflowConfigIds.join("|"),
                 (DELETE_BEFORE_WRITE) : String.valueOf(pathConfiguration.deleteBeforeWrite),
                 (PATH_DELTA_CONTENT)  : String.valueOf(pathConfiguration.pathDeltaContent),

@@ -48,7 +48,7 @@ class DeleteBeforeWriteTaskletSpec extends Specification {
         null                                  |   []
         "/foo/bar/foopath"                    |   ["foopath"]
         "/foo/bar/foopath "                   |   ["foopath"]
-        "/foo/bar/foo/bar*/foo/bar/foo/doo"   |   ["foo/bar", "foo/doo"]
+        "/foo/bar/foo/bar&&/foo/bar/foo/doo"   |   ["foo/bar", "foo/doo"]
     }
 
 
@@ -107,7 +107,7 @@ class DeleteBeforeWriteTaskletSpec extends Specification {
         final session = repository.loginAdministrative(null)
 
         final excludePaths = ["/root/a/a/b", "/root/a/a/c", "/root/b"]
-        final deleteBeforeWriteTasklet = new DeleteBeforeWriteTasklet("/root", excludePaths.join('*'))
+        final deleteBeforeWriteTasklet = new DeleteBeforeWriteTasklet("/root", excludePaths.join('&&'))
 
         ClientBatchJobContext.setSession(session)
 
@@ -161,7 +161,7 @@ class DeleteBeforeWriteTaskletSpec extends Specification {
         final session = repository.loginAdministrative(null)
 
         final excludePaths = ["/root/a", "/root/b/c", "/root/d"]
-        final deleteBeforeWriteTasklet = new DeleteBeforeWriteTasklet("/root", excludePaths.join('*'))
+        final deleteBeforeWriteTasklet = new DeleteBeforeWriteTasklet("/root", excludePaths.join('&&'))
 
         ClientBatchJobContext.setSession(session)
 

@@ -33,8 +33,8 @@ class GrabbitContentPullServletSpec extends Specification {
     def "Can pull a content stream from a path correctly"() {
         given:
         final request = Mock(SlingHttpServletRequest) {
-            getParameter("path") >> "%2Fsome%2Fpath"
-            getParameterValues("excludePath") >> ["%2Fexclude%2Fme", "%2Fexclude%2Fme%2Ftoo"]
+            getParameter("path") >> "/some/path"
+            getParameterValues("excludePath") >> ["/exclude/me", "/exclude/me/too"]
             getParameter("after") >> "2016-01-29T13%3A53%3A58.831-05%3A00"
             getRemoteUser() >> "user"
         }
